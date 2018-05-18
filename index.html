@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!-- c de codigo -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@100cyCdeCountry">
+    <meta name="twitter:title" content="Traductor de CdeCoogle">
+    <meta name="twitter:description" content="Traduce de Español a CdeCountriano">
+    <meta name="twitter:image" content="https://100cyCdeCountry.github.io/Coogle_Maps/preview.png">
+	
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Traductor de CdeCoogle</title>
+</head>
+<body>
+<nav class="navbar navbar-light bg-light justify-content-between">
+    <a class="navbar-brand" href="#">
+        <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        CdeCoogle
+    </a>
+    <form id="searchbox" class="form-inline">
+        <input id="searchInput" class="form-control mr-sm-2" style="min-width: 4em" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-info my-2 my-sm-0" type="submit">Search</button>
+    </form>
+</nav>
+<div class="container">
+    <h2 style="margin-top: 0.5em; margin-bottom: -0.5em">Traductor</h2>
+    <hr>
+    <div class="row">
+        <form class="col-sm">
+            <label for="spanishText">Español</label>
+            <textarea autofocus class="form-control" id="spanishText" rows="3"></textarea>
+        </form>
+        <form class="col-sm">
+            <label for="cdeCountryText">CdeCountriano</label>
+            <textarea readonly class="form-control" id="cdeCountryText" rows="3"></textarea>
+        </form>
+    </div>
+
+    <input id="twitBtn" class="btn btn-primary mt-3" type="button" value="Twitear traducción">
+
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+    $("#spanishText").bind('input propertychange', function() {
+        $("#cdeCountryText").val(translate(this.value));
+
+    });
+
+    $("#twitBtn").click(function(){
+        tweet($("#cdeCountryText").val());
+    })
+
+    $('#searchbox').submit(function() {
+        window.open("https://twitter.com/search?q=cdecountry "+ $("#searchInput").val());
+    })
+
+    function translate(input) {
+        let output = input;
+        //100tifico
+        output = output.replace( /\bcien/gmi,"100")
+        //CdeC Rule
+        output = output.replace( /\b(c)([^d][^e][^c]|\w{1,2}\b)/gmi,"CdeC$2")
+        //Personajillos rule
+        output = output.replace( /\b(jl|oliver( ibañez)?)\b/gmi,"el que no debe ser nombrado")
+
+        return output;
+    }
+
+    function tweet(twit) {
+        let url = "https://twitter.com/intent/tweet?text="+twit;
+        window.open(url,'_blank', 'location=yes,height=400,width=600,scrollbars=yes,status=yes');
+    }
+
+</script>
+</body>
+</html>
