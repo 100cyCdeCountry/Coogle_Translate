@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="shortcut icon" href="logo.png">
 
 	<meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@100cyCdeCountry">
     <meta name="twitter:title" content="Traductor de CdeCoogle">
-    <meta name="twitter:description" content="Traduce de Español a CdeCountriano">
+    <meta name="twitter:description" content="Traduce de Español a Memespañol">
     <meta name="twitter:image" content="https://100cycdecountry.github.io/Coogle_Translate/preview.png">
 	
     <!-- Bootstrap CSS -->
@@ -36,7 +37,7 @@
             <textarea autofocus class="form-control" id="spanishText" rows="3"></textarea>
         </form>
         <form class="col-sm">
-            <label for="cdeCountryText">CdeCountriano</label>
+            <label for="cdeCountryText">Memespañol</label>
             <textarea readonly class="form-control" id="cdeCountryText" rows="3"></textarea>
         </form>
     </div>
@@ -63,10 +64,18 @@
 
     function translate(input) {
         let output = input;
+		//Cuanto
+        output = output.replace( /\bCuanto\b/gmi,"Quantum")
+		//escribe bien el nombre de cdecaudillo 
+        output = output.replace( /\marti\b/gmi,"Martí")
         //100tifico
         output = output.replace( /\bcien/gmi,"100")
         //CdeC Rule
-        output = output.replace( /\b(c)([^d][^e][^c]|\w{1,2}\b)/gmi,"CdeC$2")
+        output = output.replace( /\b(c)((?!dec))/gmi,"CdeC$2")
+		//Ssss
+        output = output.replace( /\bs/gmi,"sssh")
+		//Final
+        output = output.replace( /\.$/mi,". Y adios.")
         //Personajillos rule
         output = output.replace( /\b(jl|oliver( ibañez)?)\b/gmi,"el que no debe ser nombrado")
 
