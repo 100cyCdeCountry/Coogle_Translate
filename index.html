@@ -62,24 +62,27 @@
         window.open("https://twitter.com/search?q=cdecountry "+ $("#searchInput").val());
     })
 
+	//Gracias regex por tener en cuenta los acentos y esas cdecosas :)
     function translate(input) {
         let output = input;
-		//Memes rarunos
-        output = output.replace( /\aborto\b/gmi,"bendición")
-		//Cuanto
-        output = output.replace( /\bCuanto\b/gmi,"Quantum")
-		//escribe bien el nombre de cdecaudillo 
-        output = output.replace( /\marti\b/gmi,"Martí")
-        //100tifico
-        output = output.replace( /\bcien/gmi,"100")
-        //CdeC Rule
-        output = output.replace( /\b(c)((?!dec))/gmi,"CdeC$2")
 		//Ssss
-        output = output.replace( /\bs/gmi,"sssh")
+        output = output.replace( /(^|\s)s/gmi,"$1sssh")
+		//Crespo is love, crespo is live
+        output = output.replace( /(^|\s)crespo(\s|$)/gmi,"$1el ser más perfecto del universo$2")
+		//Memes rarunos
+        output = output.replace( /(^|\s)aborto(\s|$)/gmi,"$1bendición$2")
+		//Cuanto
+        output = output.replace( /(^|\s)Cuanto(\s|$)/gmi,"$1Quantum$2")
+		//escribe bien el nombre de cdecaudillo 
+        output = output.replace( /(^|\s)marti(\s|$)/gmi,"$1Martí$2")
+        //100tifico
+        output = output.replace( /cien/gmi,"100")
+        //CdeC Rule
+        output = output.replace( /(^|\s)(c)((?!dec))/gmi,"$1CdeC")
 		//Final
         output = output.replace( /\.$/mi,". Y adios.")
         //Personajillos rule
-        output = output.replace( /\b(jl|oliver( ibañez)?)\b/gmi,"el que no debe ser nombrado")
+        output = output.replace( /(^|\s)(jl|oliver( ibañez)?)(\s|$)/gmi,"$1el que no debe ser nombrado$4")
 
         return output;
     }
